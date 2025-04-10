@@ -10,6 +10,12 @@ df
 df.isnull().sum()
 df.info()
 
+# Keep status = shipped, resolved
+print(df['STATUS'].unique())
+
+values_to_drop = ['Cancelled', 'On Hold', 'Disputed', 'In Process']
+df = df[~df['STATUS'].isin(values_to_drop)]
+
 # Product line with highest and lowest
 agg_product_line = df.groupby('PRODUCTLINE')['QUANTITYORDERED'].sum().reset_index()
 agg_product_line
